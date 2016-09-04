@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    <title>4G</title>
+    <meta charset="utf-8">
+    <link href="../help.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="detailBox">
+        <h1>
+            4G
+            <a href="javascript:;" class="righBut" onClick="back()">返回目录</a>
+        </h1>
+        <p class="noiceC">
+            <span class="bold">说明：</span>
+            仅支持以下能力的设备才具有相对应的功能。
+        </p>
+        <h2>拨号设置</h2>
+        <table class="Table" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="wid80">无线网络类型</td>
+                <td>
+                    <span class="kuai">■</span>
+                    WCDMA信号——拔号、短信、来电（只支持联通卡）
+                    <br/>
+                    <span class="kuai">■</span>
+                    TD-SCDMA信号——拔号、短信、来电（只支持移动卡）
+                    <br/>
+					<span class="kuai">■</span>
+                    EVDO信号——拨号（只支持电信卡）
+                    <br/>
+					<span class="kuai">■</span>
+                    TD-LTE信号——拨号（只支持移动卡）
+                    <br/>
+					<span class="kuai">■</span>
+                    FDD-LTE信号——拨号（支持电信/联通卡）
+                    <br/>
+					<span class="kuai">■</span>
+                    CDMA1X信号——电话、短信（只支持电信卡）
+                    <br/>
+                    <span class="kuai">■</span>
+                    自动模式——拔号、短信、来电（推荐使用自动模式）
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td class="wid80">启动</td>
+                <td>勾选后启动4G模块。</td>
+            </tr>
+            <tr>
+                <td class="wid80">APN</td>
+                <td>普通卡中电信的APN为ctlte，移动为cmnet，联通为3gnet；专网卡因卡而异。</td>
+            </tr>
+            <tr>
+                <td class="wid80">鉴权模式</td>
+                <td>普通卡中电信的鉴权模式为CHAP或者PAP，移动和联通均为无；专网卡因卡而异。</td>
+            </tr>
+            <tr>
+                <td class="wid80">拨号号码</td>
+                <td>普通卡中电信的拨号号码为#777，移动为*98*1#，联通为*99#；专网卡因卡而异。</td>
+            </tr>
+            <tr>
+                <td class="wid80">用户名</td>
+                <td>普通卡中电信的用户名为ctnet@mycdma.cn或card，移动和联通均为无；专网卡因卡而异。</td>
+            </tr>
+            <tr>
+                <td class="wid80">密码</td>
+                <td>普通卡中电信的用户密码为vnet.mobi或card，移动和联通均为无；专网卡因卡而异。</td>
+            </tr>
+            <tr>
+                <td class="wid80">保活时间</td>
+                <td>
+                    0~7200秒，默认为30秒。保活时间是指在设置的拨号时间段以外的时间里，每隔30秒，设备自动获取4G拨号状态，将拨号断掉，以节约流量。
+                </td>
+            </tr>
+            <tr>
+                <td class="wid80">时间段</td>
+                <td>
+                    可设置拨号的时间段。如果在时间段外，可通过短信激活功能，来开启/关闭拨号功能。
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">无线网络状态</th>
+            </tr>
+            <tr>
+                <td class="wid80">IP地址</td>
+                <td>当通过4G拨号成功后，显示获取到的IP。</td>
+            </tr>
+            <tr>
+                <th colspan="2">无线信号</th>
+            </tr>
+            <tr>
+                <td class="wid80">信号</td>
+                <td>显示当前信号的强弱。当信号强度过低时，会出现拔号不成功，或拔号成功但数据无法发送的现象。</td>
+            </tr>
+        </table>
+        <h2>手机设置</h2>
+        <table class="Table" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="wid80">短信发送</td>
+                <td>
+                    事件管理中，相应的短信联动使能勾上之后，当事件发生时，会以短信方式发送到接受列表中的手机号码上。使用该功能时，需要在事件管理页面勾选相应的短信联动使能。
+                </td>
+            </tr>
+            <tr>
+                <td class="wid80">短信激活</td>
+                <td>发送列表里的手机可发送短信ON/OFF至设备内的SIM卡，来开启/关闭拨号功能，以及发送REBOOT来重启设备。</td>
+            </tr>
+            <tr>
+                <td class="wid80">电话激活</td>
+                <td>呼叫列表里的手机可打电话至设备内的SIM卡，来开启拨号功能。</td>
+            </tr>
+        </table>
+        <p class="noiceC">
+            <span class="bold">注：</span>
+            <br/>
+            1、SIM卡不支持热插拔，热插拔可能导致SIM卡烧坏。SIM卡插入后，只有重启4G模块才能重新发现SIM。
+            <br/>
+            2、SIM卡不存在时，不能收发短信、接收来电或4G拔号。
+        </p>
+    </div>
+    <script type="text/javascript" src="../../jsBase/lib/m.js"></script>
+    <script type="text/javascript" src="../help.js"></script>
+</body>
+</html>

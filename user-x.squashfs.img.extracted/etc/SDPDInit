@@ -1,0 +1,480 @@
+#! /bin/sh
+
+#以下为能力集初始化
+
+#模拟输出
+CAP_TVOUT=on
+#补光灯类型
+LIGHT_TYPE=NoneLight
+#外部云台485控制
+CAP_EX485=off
+#雨刷控制
+CAP_RAINBRUSH=off
+#广角云台
+CAP_WILDPTZ=off
+#温度控制
+CAP_TEMPCTRL=off
+#云台坐标显示
+CAP_PTZCOOR=off
+#云台变倍显示
+CAP_PTZZOOM=off
+
+#云台方案
+CAP_PTZSUIT=none
+#风扇调节控制
+CAP_FAN=off
+#加热器调节控制
+CAP_HEATER=off
+#正北方向控制 --- 定制变量
+CAP_NORTH=off
+#球机中性程序名称-----定制变量
+NAME_DOME="IP PTZ Dome"
+#大云台中性程序名称-----定制变量
+NAME_PTZCAMERAL="IP PTZ Camera"
+#机芯单卖隐私遮挡-----定制变量
+CAP_PM=off
+#寿命统计方法
+CAP_LIFESTATUS=off
+#仰角限位
+CAP_PTZELEVATION=off
+#虚拟负角度
+CAP_PTZVIRTUAL=0
+
+
+#根据HWID确定能力集和pd文件路径
+PRODUCT=$(gethwid 0)
+temp=${PRODUCT##*hwidValue == }
+product_name=${temp%% *}
+echo $product_name
+PRODUCT_NAME=$product_name
+
+#根据外设管理环境变量确定相应的能力集合
+gethwid 0 0
+if [ $? = "1" ];then
+	echo "There is an peripheral environment variable"
+	gethwid 0 1
+	case $? in
+		"1") LIGHT_TYPE=IRLight ;;
+		"3") LIGHT_TYPE=LaserLight ;;
+		"4") LIGHT_TYPE=WhiteLight ;;
+	esac
+	gethwid 0 2
+	if [ $? = "0" ];then
+		CAP_TVOUT=off
+	else
+		CAP_TVOUT=on
+	fi
+	gethwid 0 3
+	if [ $? = "0" ];then
+		CAP_EX485=off
+	else
+		CAP_EX485=on
+	fi
+	gethwid 0 4
+	if [ $? = "0" ];then
+		CAP_RAINBRUSH=off
+	else
+		CAP_RAINBRUSH=on
+	fi
+	gethwid 0 5
+	if [ $? = "0" ];then
+		CAP_TEMPCTRL=off
+	else
+		CAP_TEMPCTRL=on
+	fi
+	gethwid 0 7
+	case $? in
+		"0") CAP_FAN=off CAP_HEATER=off ;;
+		"1") CAP_FAN=off CAP_HEATER=on ;;
+		"10") CAP_FAN=on CAP_HEATER=off ;;
+		"11") CAP_FAN=on CAP_HEATER=on ;;
+	esac
+
+	#云台方案
+	gethwid 0 8
+	case $? in
+		"0") CAP_PTZSUIT=none ;;
+		"1") CAP_PTZSUIT=dome CAP_PTZCOOR=on CAP_PTZZOOM=on CAP_NORTH=off ;;
+		"2") CAP_PTZSUIT=ptz CAP_WILDPTZ=on CAP_PTZCOOR=on CAP_PTZZOOM=on CAP_NORTH=off ;;
+	esac
+	
+	gethwid 0 11
+	Result=$?
+	#寿命统计方法
+	if [ $((($Result >> 0) & 1)) -eq 1 ]; then
+		CAP_LIFESTATUS=on
+	else
+		CAP_LIFESTATUS=off
+	fi
+	
+	#仰角限位
+	if [ $((($Result >> 1) & 1)) -eq 1 ]; then
+		CAP_PTZELEVATION=on
+	else
+		CAP_PTZELEVATION=off
+	fi
+	
+	#虚拟负角度
+	gethwid 0 12
+	Result=$?
+	let CAP_PTZVIRTUAL=$Result*50
+	
+fi	
+
+
+#解压缩pd到tmp目录，再根据不同的设备类型拷贝pd文件
+echo "$PRODUCT_NAME"
+unzip /mnt/pd/SDproduct.zip -d /var/tmp	 > /dev/null && \
+mkdir -p /var/tmp/pd 									&& \
+test -d "/var/tmp/SDproduct/$PRODUCT_NAME" 				&& \
+echo "SDproduct unzip OK"								&& \
+cp -rf /var/tmp/SDproduct/$PRODUCT_NAME/* /var/tmp/pd/	&& \
+cp -rf /var/tmp/SDproduct/SDCameras /var/tmp/pd/	&& \
+cp -f /var/tmp/SDproduct/ProductTransform /var/tmp/pd/
+rm -rf /var/tmp/SDproduct   
+
+#拷贝机芯配置文件基础，以备下面脚本修改
+mkdir -p /var/Cameras
+cp -f /var/tmp/pd/SDCameras/SDCameras /var/Cameras/$product_name
+
+#由于机械机构导致需要默认定义云台限位档位球机
+#目前是默认定义仰角限位为0°
+if [ "$CAP_PTZELEVATION" = "on" ]; then
+	echo {\
+			\"Default\" : {\
+				\"PtzElevation\" : \
+				[ \
+					{ \
+						\"ElevationAngle\" : 0 \
+					}\
+				] \
+			},\
+			\"Ability\" : {\
+				\"PtzElevation\" : {\
+					\"Support\" : true\
+				}\
+			}\
+		} > /var/Cameras/PtzElevationCaps~
+	/usr/bin/jsonmerge /var/Cameras/$product_name /var/Cameras/PtzElevationCaps~
+	rm  /var/Cameras/PtzElevationCaps~
+else
+	echo {\
+			\"Ability\" : {\
+				\"PtzElevation\" : {\
+					\"Support\" : false\
+				}\
+			}\
+		} > /var/Cameras/PtzElevationCaps~
+	/usr/bin/jsonmerge /var/Cameras/$product_name /var/Cameras/PtzElevationCaps~
+	rm  /var/Cameras/PtzElevationCaps~
+fi
+
+
+#广角云台影响隐私遮挡和云台限位   
+if [ $CAP_WILDPTZ = "on" ];then
+	echo {\"Ability\" : { \"PrivacyMasking\" : {\"Support\" :false}, \"PtzLimit\" : {\"Support\" :true} } } > /var/Cameras/WILDPTZON~
+	/usr/bin/jsonmerge -r /var/Cameras/$product_name /var/Cameras/WILDPTZON~
+	rm -rf /var/Cameras/WILDPTZON~
+fi
+
+#机芯单买，没有开机动作和空闲动作
+temp=`echo $product_name | grep -o CA-HZ -m 1`
+if [ "$temp" = "CA-HZ" ] && [ $CAP_PTZSUIT = "none" ];then
+	echo {\"Ability\" : { \"PowerUp\" : {\"Support\" :false}, \"PrivacyMasking\" : {\"Support\" :false}, \"IdleMotion\" : {\"Support\" :false} } } > /var/Cameras/SingleSell~
+	/usr/bin/jsonmerge -r /var/Cameras/$product_name /var/Cameras/SingleSell~
+	rm -rf /var/Cameras/SingleSell~
+fi
+
+#隐私遮挡可定制接口   -----机芯单卖需要对外提供
+if [ $CAP_PM = "on" ];then
+	echo {\"Ability\" : { \"PrivacyMasking\" : {\"Support\" :true} } } > /var/Cameras/pm~
+	/usr/bin/jsonmerge -r /var/Cameras/$product_name /var/Cameras/pm~
+	rm -rf /var/Cameras/pm~
+fi
+
+
+#打开LIGHTTYPE信息(灯光控制默认支持)
+#既存大云台设备默认配置红外灯(远光/近光，无角度控制)，后新加激光灯(有强度、角度控制)
+#无灯配置灯光false
+#红外灯/白光灯时只追加灯类型即可
+#激光灯时使用了另外配置(大云台追加新配置)
+echo "LIGHT_TYPE = $LIGHT_TYPE"
+/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition /var/tmp/pd/SDCameras/$LIGHT_TYPE
+
+
+#外部485控制能力
+if [ $CAP_EX485 = "on" ];then
+	echo "CAP_EX485 = on"
+	echo { \"PtzDeviceSupport\" :  true } > /var/tmp/pd/PtzEX485~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzEX485~
+	rm -f /var/tmp/pd/PtzEX485~	
+fi
+
+#广角云台能力
+if [ $CAP_WILDPTZ = "on" ];then
+	echo {\
+		 \"PtzMotionRange\" : {\
+		   \"HorizontalAngle\" : [ 0 , 360 ],\
+		   \"VerticalAngle\" : [ -90 , 90 ]\
+		  }\
+	} > /var/tmp/pd/PtzMotionRange~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzMotionRange~
+	rm -f /var/tmp/pd/PtzMotionRange~
+fi
+
+#云台坐标显示能力
+if [ $CAP_PTZCOOR = "on" ];then
+	echo "CAP_PTZCOOR = on"
+	echo { \"SupportPTZCoordinates\" :  true } > /var/tmp/pd/PtzCoor~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzCoor~
+	rm -f /var/tmp/pd/PtzCoor~
+fi
+
+#云台变倍显示能力
+if [ $CAP_PTZZOOM = "on" ];then
+	echo "CAP_PTZZOOM = on"
+	echo { \"SupportPTZZoom\" :  true } > /var/tmp/pd/PtzZoom~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzZoom~
+	rm -f /var/tmp/pd/PtzZoom~
+fi
+
+#正北方向显示能力
+if [ $CAP_NORTH = "on" ];then
+	echo "CAP_NORTH = on"
+	echo { \"PtzDirectionDisplay\" :  true } > /var/tmp/pd/PtzNorth~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzNorth~
+	rm -f /var/tmp/pd/PtzNorth~
+fi
+
+#定时任务
+echo "AutoMovement = on"
+echo {\
+	 \"PtzAutoMovement\" : {\
+	   \"Support\" : true,\
+	   \"TaskNum\" : 4,\
+	   \"Action\" : [\"Preset\",\"Tour\",\"Pattern\",\"AutoScan\"],\
+	   \"SupportSnapShot\" : false\
+	  }\
+} > /var/tmp/pd/PtzAutoMovement~
+/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzAutoMovement~
+rm -f /var/tmp/pd/PtzAutoMovement~
+
+
+#雨刷控制能力
+if [ $CAP_RAINBRUSH = "on" ];then
+	echo "CAP_RAINBRUSH = on"	
+	echo {\
+		 \"RainBrushControl\" : {\
+		   \"Support\" : true\
+		  }\
+	} > /var/tmp/pd/RainBrush~
+
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductDefinition  /var/tmp/pd/RainBrush~
+	rm -f /var/tmp/pd/RainBrush~	
+fi
+
+#温度能力
+if [ $CAP_TEMPCTRL = "on" ];then
+	echo "CAP_TEMPCTRL = on"
+	echo {\
+		 \"Temperatures\" : {\
+		   \"Support\" : true,\
+		   \"OSDTemperatureUnit\" : [\"Centigrade\",\"Fahrenheit\",\"Kelvin\"]\
+		  }\
+	} > /var/tmp/pd/Temperature~
+
+	/usr/bin/jsonmerge /var/tmp/pd/ProductDefinition  /var/tmp/pd/Temperature~
+	rm -f /var/tmp/pd/Temperature~	
+fi
+
+#寿命统计功能
+if [ $CAP_LIFESTATUS = "on" ];then
+	echo "CAP_LIFESTATUS = on"
+	echo {\
+		 \"PtzOperationStatus\" : {\
+		   \"Support\" : true,\
+		   \"SupportManufactureDate\" : false,\
+		   \"SupportUpTime\" : false\
+		  }\
+	} > /var/tmp/pd/ProductDefinition~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/ProductDefinition~
+	rm -f /var/tmp/pd/ProductDefinition~
+fi
+
+
+#兼容老的HWID时，DeviceInfo里面的mode和HWID的设备名称一致
+echo {\
+	\"DeviceInfo\" : {\
+		\"Mode\" : \"$product_name\",\
+		\"Serial\" : \"SD\"\
+	}\
+} > /var/tmp/pd/DeviceInfoConfig~
+/usr/bin/jsonmerge -r /var/tmp/pd/CustomConfig /var/tmp/pd/DeviceInfoConfig~
+rm -f /var/tmp/pd/DeviceInfoConfig~
+
+#确保中性的球机设备名称为IP PTZ Dome,大华的程序没有别名时显示也是IP PTZ Dome
+if [ $CAP_PTZSUIT = "dome" ];then
+	echo {\
+		\"DeviceTypeTransform\" : {\
+			\"General\" : {\
+				\"$product_name\" : \"$NAME_DOME\"\
+			}\
+		}\
+	} > /var/tmp/pd/PTZSuit~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductTransform  /var/tmp/pd/PTZSuit~
+	rm -f /var/tmp/pd/PTZSuit~
+#未设置别名时，球机显示的设备型号为IP PTZ Dome
+	echo {\"Device\" : \"IP PTZ Dome\"} > /var/tmp/pd/DevicePD~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductDefinition  /var/tmp/pd/DevicePD~
+	rm -f /var/tmp/pd/DevicePD~
+	
+	echo {\
+		\"DeviceTypeTransform\" : {\
+			\"Dahua\" : {\
+				\"$product_name\" : \"$NAME_DOME\"\
+			}\
+		}\
+	} > /var/tmp/pd/PTZSuit~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductTransform  /var/tmp/pd/PTZSuit~
+	rm -f /var/tmp/pd/PTZSuit~
+fi
+
+
+#确保中性的云台设备名称为IP PTZ Camera
+if [ $CAP_PTZSUIT = "ptz" ];then
+	echo {\
+		\"DeviceTypeTransform\" : {\
+		\"General\" : {\
+			\"$product_name\" : \"$NAME_PTZCAMERAL\"\
+		  }\
+		}\
+	} > /var/tmp/pd/PTZSuit~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductTransform  /var/tmp/pd/PTZSuit~
+	rm -f /var/tmp/pd/PTZSuit~
+	
+	echo {\
+		\"DeviceTypeTransform\" : {\
+		\"Dahua\" : {\
+			\"$product_name\" : \"$NAME_PTZCAMERAL\"\
+		  }\
+		}\
+	} > /var/tmp/pd/PTZSuit~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductTransform  /var/tmp/pd/PTZSuit~
+	rm -f /var/tmp/pd/PTZSuit~
+	
+	echo {\
+		\"Network\" : {\
+		  \"Hostname\" : \"SDZ\",\
+		  \"Domain\" : \"SDZ\"\
+		},\
+		\"DeviceInfo\" : {\
+		    \"Mode\" : \"$product_name\",\
+			\"Serial\" : \"SD_SDZ\"\
+		},\
+		 \"ChannelTitle\" : [\
+		  {\
+			 \"Name\" : \"SDZ\",\
+			 \"Type\" : \"SDZ\"\
+		  }\
+		]\
+	} > /var/tmp/pd/SDZCustomConfig~
+	/usr/bin/jsonmerge -r /var/tmp/pd/CustomConfig /var/tmp/pd/SDZCustomConfig~
+	rm -f /var/tmp/pd/SDZCustomConfig~
+	
+	echo {\"DeviceSubClass\" : \"SD_PTZ\"} > /var/tmp/pd/ProductDefinition~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductDefinition  /var/tmp/pd/ProductDefinition~
+	rm -f /var/tmp/pd/ProductDefinition~
+	
+fi
+
+#机芯单卖配置处理
+temp=`echo $product_name | grep -o CA-HZ -m 1`
+if [ "$temp" = "CA-HZ" ] && [ $CAP_PTZSUIT = "none" ];then
+	echo {\
+		 \"Network\" : {\
+		   \"Hostname\" : \"Camera\",\
+		   \"Domain\" : \"Camera\"\
+		  },\
+		  \"DeviceInfo\" : {\
+			\"Mode\" : \"$product_name\",\
+			\"Serial\" : \"SD_CA\" \
+		  },\
+		   \"ChannelTitle\" : [\
+			  {\
+				 \"Name\" : \"Camera\",\
+				 \"Type\" : \"Camera\"\
+			  }\
+		    ]\
+	} > /var/tmp/pd/CustomConfig~
+
+	/usr/bin/jsonmerge -r /var/tmp/pd/CustomConfig /var/tmp/pd/CustomConfig~
+	rm -f /var/tmp/pd/CustomConfig~
+	
+	echo {\"DeviceSubClass\" : \"SD_CA\"} > /var/tmp/pd/ProductDefinition~
+	/usr/bin/jsonmerge -r /var/tmp/pd/ProductDefinition  /var/tmp/pd/ProductDefinition~
+	rm -f /var/tmp/pd/ProductDefinition~
+	
+#机芯单卖显示的云台协议为：PelcoD, PelcoP, DH-SD1, DH-SD3
+	echo {\
+		\"PtzProtocolList\" : [\"DH-SD1\", \"PelcoD\", \"PelcoP\", \"DH-SD3\"]\
+	} > /var/tmp/pd/ProductDefinition~
+	
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/ProductDefinition~
+	rm -f /var/tmp/pd/ProductDefinition~
+else
+	echo "PtzProtocolList locked!"
+	echo {\
+		\"PtzProtocolList\" : [\"DH-SD1\", \"DH-SD3\"]\
+	} > /var/tmp/pd/ProductDefinition~
+	
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/ProductDefinition~
+	rm -f /var/tmp/pd/ProductDefinition~
+fi
+
+#风扇调节控制
+if [ $CAP_FAN  =  "on" ];then
+	echo "CAP_FAN = on"
+	echo {\
+		\"PtzFan\" : {\
+			\"Support\" : true \
+		}\
+	} > /var/tmp/pd/PtzFan~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzFan~
+	rm -f /var/tmp/pd/PtzFan~
+fi
+
+#加热器调节控制
+if [ $CAP_HEATER  =  "on" ];then
+	echo "CAP_HEATER = on"
+	echo {\
+		\"PtzHeater\" : {\
+			\"Support\" : true \
+		}\
+	} > /var/tmp/pd/PtzHeater~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/PtzHeater~
+	rm -f /var/tmp/pd/PtzHeater~
+fi
+
+if [ -f /usr/sbin/4G ];then
+	echo "4G = on"
+	echo {\
+			\"4G\" : true \
+		} > /var/tmp/pd/4G~
+	/usr/bin/jsonmerge -a /var/tmp/pd/ProductDefinition  /var/tmp/pd/4G~
+	rm -f /var/tmp/pd/4G~
+	
+	net3g&
+	check_route.sh&
+fi
+
+if [ $CAP_PTZVIRTUAL -ge 0 ];then
+	echo {\
+			\"Ability\" : {\
+				\"PtzElevation\" : {\
+					\"AngleRange\" : [0, -$CAP_PTZVIRTUAL]\
+				}\
+			}\
+		} > /var/Cameras/PtzElevationCaps~
+	/usr/bin/jsonmerge /var/Cameras/$product_name /var/Cameras/PtzElevationCaps~
+	rm  /var/Cameras/PtzElevationCaps~
+fi

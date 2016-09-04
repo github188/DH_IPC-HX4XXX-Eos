@@ -1,0 +1,93 @@
+#! /bin/sh
+
+#校验HWID是否修改
+/usr/etc/checkHWID.sh
+
+#检验peripheral是否修改
+/usr/etc/checkPeripheral.sh
+
+#以下为能力集初始化
+source /usr/etc/SDPDInit
+
+#解压3A配置
+unzip /usr/data/2Acfg.zip -d /var/tmp > /dev/null
+!(test -d "/mnt/mtd/3A") && mkdir /mnt/mtd/3A
+!(test -d "/mnt/backup/3A") && mkdir /mnt/backup/3A
+PRODUCT_NAME_3A=$product_name
+test -n "$PRODUCT_NAME_3A" && mv -f /var/tmp/2Acfg/$PRODUCT_NAME_3A/* /var/tmp/ && rm -rf /var/tmp/2Acfg
+#如果3A目录下已经存在配置就不拷贝/软链接了
+!(test -e "/mnt/mtd/3A/aew_para.bin") && cp -f /var/tmp/aew_para.bin /mnt/mtd/3A/aew_para.bin
+!(test -e "/mnt/mtd/3A/Len_Ctrl.bin") && ln -s /var/tmp/Len_Ctrl.bin /mnt/mtd/3A/Len_Ctrl.bin
+!(test -e "/mnt/mtd/3A/Len_DftTraceCurve.bin") && ln -s /var/tmp/Len_DftTraceCurve.bin /mnt/mtd/3A/Len_DftTraceCurve.bin
+!(test -e "/mnt/mtd/3A/Len_Step.bin") && ln -s /var/tmp/Len_Step.bin /mnt/mtd/3A/Len_Step.bin
+!(test -e "/mnt/mtd/3A/Len_TraceTable.bin") && ln -s /var/tmp/Len_TraceTable.bin /mnt/mtd/3A/Len_TraceTable.bin
+!(test -e "/mnt/mtd/3A/visca_cfg.bin") && ln -s /var/tmp/visca_cfg.bin /mnt/mtd/3A/visca_cfg.bin
+
+#将隐藏lens分区曲线配置文件读到/var/目录
+ln -s /usr/sbin/systools /var/tmp/lensFsProc
+/var/tmp/lensFsProc read /var/
+
+#启动syshelper
+/sbin/syshelper 60 &
+
+#启动网络，并向外发一个arp包
+ifconfig lo up
+netinit if=eth0 default
+netinit6 if=eth0
+ln -s /usr/sbin/systools /var/tmp/sendarp
+/var/tmp/sendarp 5 &
+
+#启动3800端口升级服务
+/usr/sbin/upgraded &
+
+
+#配置一些PDC暂未处理的寄存器
+if [ $product_name = "CA-HZ8030U-I" ];then
+	echo "3519 PTZ UART opened!"
+	himm 0x120400A8 0x1 >/dev/null
+	himm 0x120400B0 0x1 >/dev/null
+	himm 0x120400B4 0x1 >/dev/null
+	himm 0x120400B8 0x1 >/dev/null
+	ln -s /dev/ttyAMA2 /dev/ttyS2
+else
+	echo "3516A PTZ UART opened!"
+	himm 0x200F007C 0x1 >/dev/null
+	himm 0x200F0084 0x1 >/dev/null
+	himm 0x200F0088 0x1 >/dev/null
+	himm 0x200F008C 0x1 >/dev/null
+	ln -s /dev/ttyAMA2 /dev/ttyS2
+fi
+
+insmod /usr/lib/modules/ivf.ko
+insmod /usr/lib/modules/sensor.ko
+insmod /usr/lib/modules/len_driver.ko
+
+#尝试运行定制化脚本，如果custom分区下存在SDcustom.sh脚本的话
+test -e /mnt/custom/SDcustom.sh && /mnt/custom/SDcustom.sh
+
+VideoEnv="AEWB AF VISCA EX2 DSP"
+if [ $CAP_TVOUT = "on" ];then
+	echo "CAP_TVOUT = on"
+	VideoEnv="${VideoEnv} TVOUT"
+fi
+
+if [ $product_name = "CA-HZ8030U-I" ];then
+	#3519的VideoDaemon和Sonia合并，给VideoDaemon参数传给sonia
+	echo "${VideoEnv}" >/var/tmp/videoEnv
+else
+	#3516A的VideoDaemon和sonia分开，需要单独启动
+	APPAUTO=`cat /proc/dahua/bootpara | grep -m 1 ^appauto:`
+	VIDEODEBUG=`cat /dev/mtdblock1 | grep -m 1 ^videodebug=`
+	if [ "$APPAUTO" = "appauto:0" ] && [ "$VIDEODEBUG" = "videodebug=1" ];then 
+		#当appauto=0且videodebug=1时，不启动VideoDaemon，便于采集调试
+		echo "In debug mode VideoDaemon is not start!"
+	else
+		VideoDaemon ${VideoEnv} &
+	fi
+	#等3秒，以确保VideoDaemon将必要段落启动完成
+	busybox sleep 3
+fi
+
+
+
+

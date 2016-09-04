@@ -1,0 +1,1004 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<gCfgAllInfo>
+    <!--Platform的BUS初始化配置-->
+    <gPlatformCfgAll>
+		<spiBusInitParamsArray>
+			<spiBusInitParams>
+				<!--MCSPI总线控制器号，见PRC_SpiBusNum定义-->
+				<busId>1</busId>
+				<!--SPI总线的引脚模式-->
+				<mode>0</mode>
+				<!--主从模式选择，目前只支持轮询模式:0: Slave mode1: Master mode-->
+				<isMasterMode>1</isMasterMode>
+				<!--数据收发操作模式选择，目前只支持轮询操作模式，其定义见PRC_SpiOpMode-->
+				<opMode>0</opMode>
+				<!--SPI模拟引脚配置参数 -->
+				<siPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>-1</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</siPinCfg>
+				<!--SPI模拟引脚配置参数-->
+				<soPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>-1</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况，-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反 -->
+					<isReverse>0</isReverse>
+					<!-- 确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+					<debouncTime>0</debouncTime>
+				</soPinCfg>
+				<!--spi 时钟引脚参数-->
+				<clkPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>-1</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</clkPinCfg>
+				<!--配置MOSI,MISI端口输入输出属性，8127平台可以控制具体输入输出端口-->
+				<dataMode>0</dataMode>
+			</spiBusInitParams>
+			<spiBusInitParams>
+				<!--MCSPI总线控制器号，见PRC_SpiBusNum定义-->
+				<busId>65535</busId>
+				<!--SPI总线的引脚模式-->
+				<mode>0</mode>
+				<!--主从模式选择，目前只支持轮询模式:0: Slave mode1: Master mode-->
+				<isMasterMode>0</isMasterMode>
+				<!--数据收发操作模式选择，目前只支持轮询操作模式，其定义见PRC_SpiOpMode-->
+				<opMode>0</opMode>
+				<!--SPI模拟引脚配置参数 -->
+				<siPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>0</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</siPinCfg>
+				<!--SPI模拟引脚配置参数-->
+				<soPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>0</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况，-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反 -->
+					<isReverse>0</isReverse>
+					<!-- 确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+					<debouncTime>0</debouncTime>
+				</soPinCfg>
+				<!--spi 时钟引脚参数-->
+				<clkPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>0</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</clkPinCfg>
+				<!--配置MOSI,MISI端口输入输出属性，8127平台可以控制具体输入输出端口-->
+				<dataMode>0</dataMode>
+			</spiBusInitParams>
+		</spiBusInitParamsArray>
+		<I2CinitParamsArray>
+		    <!--I2C总线初始化参数-->
+			<I2CinitParams>
+				<!--I2C总线编号, 定义见PRC_I2cBusNum-->
+				<busId>4</busId>
+				<!--I2C总线的引脚模式 -->
+				<mode>0</mode>
+				<!--I2C总线频率-->
+				<freq>100000</freq>
+				<!--I2C总线延时-->
+				<delay>10</delay>
+				<!--模拟I2C总线引脚配置-->
+				<dataPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>43</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</dataPinCfg>
+				<clkPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>46</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+					<debouncTime>0</debouncTime>
+				</clkPinCfg>
+				<!--复位I2C总线的管脚-->
+				<resetGio>65535</resetGio>
+			</I2CinitParams>
+			<!--I2C总线初始化参数-->
+			<I2CinitParams>
+				<!--I2C总线编号, 定义见PRC_I2cBusNum-->
+				<busId>5</busId>
+				<!--I2C总线的引脚模式 -->
+				<mode>0</mode>
+				<!--I2C总线频率-->
+				<freq>50000</freq>
+				<!--I2C总线延时-->
+				<delay>10</delay>
+				<!--模拟I2C总线引脚配置-->
+				<dataPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>51</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</dataPinCfg>
+				<clkPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>52</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+					<debouncTime>0</debouncTime>
+				</clkPinCfg>
+				<!--复位I2C总线的管脚-->
+				<resetGio>65535</resetGio>
+			</I2CinitParams>
+			<!--I2C总线初始化参数-->
+			<I2CinitParams>
+				<!--I2C总线编号, 定义见PRC_I2cBusNum-->
+				<busId>65535</busId>
+				<!--I2C总线的引脚模式 -->
+				<mode>0</mode>
+				<!--I2C总线频率-->
+				<freq>0</freq>
+				<!--I2C总线延时-->
+				<delay>0</delay>
+				<!--模拟I2C总线引脚配置-->
+				<dataPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>-1</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+					<debouncTime>0</debouncTime>
+				</dataPinCfg>
+				<clkPinCfg>
+					<!--模拟引脚GPIO号，不用时为-1-->
+					<pinId>-1</pinId>
+					<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+					<mode>0</mode>
+					<!--引脚上下拉电阻配置-->
+					<pullType>0</pullType>
+					<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+					<isReverse>0</isReverse>
+					<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+					<debouncTime>0</debouncTime>
+				</clkPinCfg>
+				<!--复位I2C总线的管脚-->
+				<resetGio>65535</resetGio>
+			</I2CinitParams>
+		</I2CinitParamsArray>
+	</gPlatformCfgAll>
+    <!--恢复默认用的GPIO配置 -->
+    <gRstStateCfg>
+        <gpioCfg>97</gpioCfg>
+        <!--reset电平，0--低电平复位，1--高电平复位-->
+        <resetLevel>0</resetLevel>
+		<!--reset电平，0--低电平复位，1--高电平复位-->
+        <resetType>0</resetType>
+		<!--第二按键，双按键恢复默认时用-->
+        <gpioCfgSec>0</gpioCfgSec>
+		<!--第二按键，reset电平: 0--低电平复位，1--高电平复位-->
+        <resetLevelSec>0</resetLevelSec>
+    </gRstStateCfg>
+    <!-- 系统复位用的配置-->
+    <gRstSysCfg>
+        <rebootType>1</rebootType>
+        <gpioCfg>65535</gpioCfg>
+        <!--表明高复位还是低复位，0为低复位，1为高复位-->
+        <level>0</level>
+    </gRstSysCfg>
+    <gIRcutCfg>
+        <!--驱动方式选择，见定义 PDC_IRcutType-->
+        <ircutID>1</ircutID>
+        <!--电机式驱动中定时器号-->
+        <timerID>0</timerID>
+        <!--光耦到日模式距离 -->
+        <daySteps>0</daySteps>
+        <!--光耦到夜模式距离-->
+        <nightSteps>0</nightSteps>
+        <!--根据PI后面接施密特触发器个数-->
+        <triggerNum>0</triggerNum>
+        <!--gpio口使用脚定义，单双光耦根据IR_DET0、IR_DET1的赋值来判断对于2线序ICR，硬件原理图上ICR_IN1对应彩色，ICR_IN2对应黑白-->
+		<gpioCfgArray>
+			<gpioCfg>95</gpioCfg>
+			<!--gpio口使用脚定义，单双光耦根据IR_DET0、IR_DET1的赋值来判断对于2线序ICR，硬件原理图上ICR_IN1对应彩色，ICR_IN2对应黑白-->
+			<gpioCfg>94</gpioCfg>
+		</gpioCfgArray>
+        <!--等待超时时间索引，见定义PDC_IRcutTimeoutIndex-->
+        <timeoutIndex>0</timeoutIndex>
+    </gIRcutCfg>
+	<gLedCfgsArray>
+		<!--LED配置-->
+		<gLedCfgs>
+			<!--LED灯管脚1的gpio号-->
+			<gpioCfg1>60</gpioCfg1>
+			<!--单色灯，该值设置为PDC_CFG_GPIO_INVA，双色灯时为LED灯管脚2-->
+			<gpioCfg2>65535</gpioCfg2>
+			<!--LED灯功能， LED_INVLIDATE为无效LED灯-->
+			<code>0x24</code>
+			<!--标识该led灯是高电平亮还是低电平亮level = 0, 标识为 0--亮，1--灭，HF5200level = 1, 标识为 1--亮，0--灭,others-->
+			<level>1</level>
+			<!--标识该led作为复用led时，该引脚是否需要申请0--not need,1--need apply-->
+			<needApply>0</needApply>
+			<!--灯的物理编号-->
+			<ledNum>0</ledNum>
+			<!--老代码默认是gpio:0,后续兼容mcu，详细见-->
+			<ledSetWay>0</ledSetWay>
+		</gLedCfgs>
+		<gLedCfgs>
+			<!--LED灯管脚1的gpio号-->
+			<gpioCfg1>60</gpioCfg1>
+			<!--单色灯，该值设置为PDC_CFG_GPIO_INVA，双色灯时为LED灯管脚2-->
+			<gpioCfg2>65535</gpioCfg2>
+			<!--LED灯功能， LED_INVLIDATE为无效LED灯-->
+			<code>0x28</code>
+			<!--标识该led灯是高电平亮还是低电平亮level = 0, 标识为 0--亮，1--灭，HF5200level = 1, 标识为 1--亮，0--灭,others-->
+			<level>1</level>
+			<!--标识该led作为复用led时，该引脚是否需要申请0--not need,1--need apply-->
+			<needApply>1</needApply>
+			<!--灯的物理编号-->
+			<ledNum>0</ledNum>
+			<!--老代码默认是gpio:0,后续兼容mcu，详细见-->
+			<ledSetWay>0</ledSetWay>
+		</gLedCfgs>
+		<gLedCfgs>
+			<!--LED灯管脚1的gpio号-->
+			<gpioCfg1>59</gpioCfg1>
+			<!--单色灯，该值设置为PDC_CFG_GPIO_INVA，双色灯时为LED灯管脚2-->
+			<gpioCfg2>65535</gpioCfg2>
+			<!--LED灯功能， LED_INVLIDATE为无效LED灯-->
+			<code>0x40</code>
+			<!--标识该led灯是高电平亮还是低电平亮level = 0, 标识为 0--亮，1--灭，HF5200level = 1, 标识为 1--亮，0--灭,others-->
+			<level>1</level>
+			<!--标识该led作为复用led时，该引脚是否需要申请0--not need,1--need apply-->
+			<needApply>1</needApply>
+			<!--灯的物理编号-->
+			<ledNum>1</ledNum>
+			<!--老代码默认是gpio:0,后续兼容mcu，详细见-->
+			<ledSetWay>0</ledSetWay>
+		</gLedCfgs>
+		<gLedCfgs>
+			<!--LED灯管脚1的gpio号-->
+			<gpioCfg1>55</gpioCfg1>
+			<!--单色灯，该值设置为PDC_CFG_GPIO_INVA，双色灯时为LED灯管脚2-->
+			<gpioCfg2>65535</gpioCfg2>
+			<!--LED灯功能， LED_INVLIDATE为无效LED灯-->
+			<code>0x27</code>
+			<!--标识该led灯是高电平亮还是低电平亮level = 0, 标识为 0--亮，1--灭，HF5200level = 1, 标识为 1--亮，0--灭,others-->
+			<level>1</level>
+			<!--标识该led作为复用led时，该引脚是否需要申请0--not need,1--need apply-->
+			<needApply>1</needApply>
+			<!--灯的物理编号-->
+			<ledNum>2</ledNum>
+			<!--老代码默认是gpio:0,后续兼容mcu，详细见-->
+			<ledSetWay>0</ledSetWay>
+		</gLedCfgs>
+		<gLedCfgs>
+			<!--LED灯管脚1的gpio号-->
+			<gpioCfg1>0</gpioCfg1>
+			<!--单色灯，该值设置为PDC_CFG_GPIO_INVA，双色灯时为LED灯管脚2-->
+			<gpioCfg2>0</gpioCfg2>
+			<!--LED灯功能， LED_INVLIDATE为无效LED灯-->
+			<code>65535</code>
+			<!--标识该led灯是高电平亮还是低电平亮level = 0, 标识为 0--亮，1--灭，HF5200level = 1, 标识为 1--亮，0--灭,others-->
+			<level>0</level>
+			<!--标识该led作为复用led时，该引脚是否需要申请0--not need,1--need apply-->
+			<needApply>0</needApply>
+			<!--灯的物理编号-->
+			<ledNum>3</ledNum>
+			<!--老代码默认是gpio:0,后续兼容mcu，详细见-->
+			<ledSetWay>0</ledSetWay>
+		</gLedCfgs>
+	</gLedCfgsArray>
+    <!--报警配置，最多4个输入输出报警，不使用的，必须使用PDC_CFG_GPIO_INVA赋值-->
+    <gAlarmCfg>
+		<gpioInCfgArray>
+			<gpioInCfg>57</gpioInCfg>
+			<gpioInCfg>65535</gpioInCfg>
+		</gpioInCfgArray>
+		<gpioOutCfgArray>
+			<gpioOutCfg>16</gpioOutCfg>
+			<gpioOutCfg>65535</gpioOutCfg>
+		</gpioOutCfgArray>
+		<inLevelArray>
+			<!--输入报警逻辑.inLevel=0表示低电平报警，inLevel=1表示高电平报警-->
+			<inLevel>0</inLevel>
+		</inLevelArray>
+		<outLevelArray>
+			<!--输出报警逻辑.outLevel=0表示低电平报警，outLevel=1表示高电平报警-->
+			<outLevel>1</outLevel>
+		</outLevelArray>
+		<alarmInMaskArray>
+			<!--报警掩码，方便产品灵活配置报警输出，可取值为: (1<<0) -- (1<<31)-->
+			<alarmInMask>0</alarmInMask>
+		</alarmInMaskArray>
+		<alarmOutMaskArray>
+			<alarmOutMask>0</alarmOutMask>
+		</alarmOutMaskArray>
+        <!--报警联动使能，1有效；一个报警输出通道对应多个GPIO输出-->
+        <alarmOutLinkEn>0</alarmOutLinkEn>
+		<alarmOutLinkArray>
+			<!--报警输出联动，相当于1路报警输出同时触发2路GPIO输出，输出报警逻辑与gpioOutCfg一致-->
+			<alarmOutLink>0</alarmOutLink>
+		</alarmOutLinkArray>
+    </gAlarmCfg>
+    <!--串口功能属性与端口id映射信息-->
+    <gComPortCfg>
+		<comMapItemsArray>
+			<comMapItems>
+				<!--该串口的Rx对应的gpio引脚号，若是485则表示A脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartRxGpio>65535</uartRxGpio>
+				<!--Rx引脚配置值, uartRxGpio有效时使用-->
+				<uartRxVal>-1</uartRxVal>
+				<!--该串口的Tx对应的gpio引脚号，若是485则表示B脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartTxGpio>65535</uartTxGpio>
+				<!--Tx引脚配置值 uartTxGpio有效时使用-->
+				<uartTxVal>-1</uartTxVal>
+				<!--该uart用作485时对应的方向控制Gpio引脚，非485时配置成PDC_CFG_GPIO_INVA-->
+				<rs485Gpio>65535</rs485Gpio>
+				<!--串口功能属性，取CommTypeList类型的枚举值-->
+				<type>0</type>
+				<!--实际物理端口号，对于特种串口从该设备实际串口数开始编号-->
+				<port>0</port>
+				<!--串口实现形式 -->
+				<comStyle>0</comStyle>
+				<!--设置485/232切换io-->
+				<changeGio>65535</changeGio>
+			</comMapItems>
+			<comMapItems>
+				<!--该串口的Rx对应的gpio引脚号，若是485则表示A脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartRxGpio>54</uartRxGpio>
+				<!--Rx引脚配置值, uartRxGpio有效时使用-->
+				<uartRxVal>1</uartRxVal>
+				<!--该串口的Tx对应的gpio引脚号，若是485则表示B脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartTxGpio>56</uartTxGpio>
+				<!--Tx引脚配置值 uartTxGpio有效时使用-->
+				<uartTxVal>1</uartTxVal>
+				<!--该uart用作485时对应的方向控制Gpio引脚，非485时配置成PDC_CFG_GPIO_INVA-->
+				<rs485Gpio>96</rs485Gpio>
+				<!--串口功能属性，取CommTypeList类型的枚举值-->
+				<type>1</type>
+				<!--实际物理端口号，对于特种串口从该设备实际串口数开始编号-->
+				<port>1</port>
+				<!--串口实现形式 -->
+				<comStyle>0</comStyle>
+				<!--设置485/232切换io-->
+				<changeGio>65535</changeGio>
+			</comMapItems>
+			<comMapItems>
+				<!--该串口的Rx对应的gpio引脚号，若是485则表示A脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartRxGpio>65535</uartRxGpio>
+				<!--Rx引脚配置值, uartRxGpio有效时使用-->
+				<uartRxVal>-1</uartRxVal>
+				<!--该串口的Tx对应的gpio引脚号，若是485则表示B脚 ，A5串口0不需要配置该引脚时将其配置成PDC_CFG_GPIO_INVA。-->
+				<uartTxGpio>65535</uartTxGpio>
+				<!--Tx引脚配置值 uartTxGpio有效时使用-->
+				<uartTxVal>-1</uartTxVal>
+				<!--该uart用作485时对应的方向控制Gpio引脚，非485时配置成PDC_CFG_GPIO_INVA-->
+				<rs485Gpio>65535</rs485Gpio>
+				<!--串口功能属性，取CommTypeList类型的枚举值-->
+				<type>3</type>
+				<!--实际物理端口号，对于特种串口从该设备实际串口数开始编号-->
+				<port>65535</port>
+				<!--串口实现形式 -->
+				<comStyle>65535</comStyle>
+				<!--设置485/232切换io-->
+				<changeGio>65535</changeGio>
+			</comMapItems>
+		</comMapItemsArray>
+        <!--引用内部上下拉电阻的使用配置, 定义见PRC_PinmuxPullType-->
+        <pullType>0</pullType>
+    </gComPortCfg>
+    <gSpfCfg>
+        <!--需要支持的DAI类型，其定义见SIL_DaiType-->
+        <daiType>3</daiType>
+        <!--需要支持的DAI传输格式，其定义见SIL_DaiFormat-->
+        <daiFormat>1</daiFormat>
+        <!--需要支持Codec类型，其定义见SIL_CodecType-->
+        <codecMask>0x20</codecMask>
+        <!--需要支持的音频采集路数，其定义见SIL_ChannleType。该值需要参考HWID的配置。HWID中有音频通道(也就是这里的声道)的配置。-->
+        <capChanlMask>1</capChanlMask>
+        <!--需要支持的音频播放路数，其定义见SIL_ChannleType。0表示无播放。该值需要参考HWID的配置。HWID中有音频通道(也就是这里的声道)的配置。-->
+        <playChanlMask>1</playChanlMask>
+        <!--需要支持的采样位数。其定义见SIL_Depth-->
+        <depthMask>4</depthMask>
+        <!--需要支持的采样频率。其定义见SIL_Frequency-->
+        <freqMask>0x949</freqMask>
+		<codecCfgArray>
+			<!--CODEC配置参数-->
+			<codecCfg>
+				<!--所属的(I2C)总线号-->
+				<busId>0</busId>
+				<!--从设备地址-->
+				<i2cAddr>0</i2cAddr>
+				<!--芯片输入时钟频率-->
+				<mclk>0</mclk>
+				<!--工作主从模式，参考 PDC_Aic23Mode-->
+				<mode>0</mode>
+				<!--音频输入物理通道数目-->
+				<inputNum>1</inputNum>
+				<inputDevArray>
+					<inputDev>
+						<!--音频输入类型，见PDC_SpfInputType-->
+						<type>1</type>
+						<channel>1</channel>
+					</inputDev>
+				</inputDevArray>
+				<!--音频增强处理掩码. 其定义见SPF_DaiEncMask-->
+				<daiEncMask>3</daiEncMask>
+				<!--复位GPIO编号-->
+				<resetGpio>0</resetGpio>
+			</codecCfg>
+			<!--CODEC配置参数-->
+		</codecCfgArray>
+        <!--SPF 的GPIO引脚号 PA_SHDN-->
+        <spfSpeakerGpio>65535</spfSpeakerGpio>
+        <!--标识该引脚是高电平有效还是低电平有效CE-TP1 spfSpeakerLevel = 1, 标识为使能有效-->
+        <spfSpeakerLevel>0</spfSpeakerLevel>
+		<!--mic in 偏置电压选择控制引脚-->
+	    <micInBiasVolGpio>65535</micInBiasVolGpio>
+        <!---mic in 偏置电压使能电平，高电平为1，低电平为0-->
+        <micInBiasVolEnLevel>0</micInBiasVolEnLevel>
+    </gSpfCfg>
+    <!--RTC配置 -->
+    <gRtcCfg>
+        <!--其定义见PDC_RtcType-->
+        <rtcId>5</rtcId>
+        <rtcDevCfg>
+            <!--rtc所使用的i2c总线id-->
+            <busId>0</busId>
+        </rtcDevCfg>
+        <!--设备改版历史曾用RTC,尝试时优先，无则配置PDC_RTC_TYPE_NR-->
+        <historicalRtcId>65535</historicalRtcId>
+        <!--曾用RTC相关配置-->
+        <rtcHistDevCfg>
+            <!--rtc所使用的i2c总线id-->
+            <busId>0</busId>
+        </rtcHistDevCfg>
+    </gRtcCfg>
+    <!--Sd卡配置-->
+    <gSdCardCfg>
+        <!--sd卡上电引脚的gpio号-->
+        <powerGpioCfg>62</powerGpioCfg>
+        <!--sd卡中断的gpio号-->
+        <irqGpioCfg>63</irqGpioCfg>
+        <!--是否支持热插拔，0:支持 1:不支持-->
+        <nonremovable>0</nonremovable>
+        <!--SD卡所使用的控制器号-->
+        <hostId>0</hostId>
+    </gSdCardCfg>
+    <gFaceBoardCfgInit>
+        <!--设备是否具有面板标识-->
+        <isFaceBoardExist>1</isFaceBoardExist>
+        <!--将面板中设备能力描述结构移动到杂项信息-->
+        <faceBoardCaps>
+            <!--报警输入端口数 -->
+            <alarmInputs>1</alarmInputs>
+            <!--报警输出端口数-->
+            <alarmOutputs>1</alarmOutputs>
+            <!--带矩阵板 -->
+            <matrixBoard>0</matrixBoard>
+            <!--带环通板-->
+            <loopBoard>0</loopBoard>
+            <!--得到矩阵板的输入路数（一般为视频输入通道数）-->
+            <matrixInputs>0</matrixInputs>
+            <!--得到矩阵板的输出路数-->
+            <matrixOutputs>0</matrixOutputs>
+            <!--得到风扇数量 -->
+            <fanCount>0</fanCount>
+            <!--得到温度传感器数量-->
+            <temperatureCount>0</temperatureCount>
+            <!--是否带shift键 -->
+            <shiftKey>0</shiftKey>
+            <!--是否带独立数字键 -->
+            <numericKey>0</numericKey>
+            <!--是否支持雨刷控制 -->
+            <wiper>0</wiper>
+            <!--是否支持PIR报警 -->
+            <alarmPir>0</alarmPir>
+            <!--是否带有补光灯-->
+            <flashLight>0</flashLight>
+            <!--门磁个数-->
+            <doors>0</doors>
+            <!--是否支持无线报警-->
+            <wirelessAlarm>0</wirelessAlarm>
+            <!--车位指示灯类型（0-旧版红绿双色，1-新版7色灯） -->
+            <parkingSpaceLightType>0</parkingSpaceLightType>
+            <!--模拟量报警输入端口数-->
+            <analogAlarmInputs>0</analogAlarmInputs>
+            <!--LED的物理灯的个数,获取物理和逻辑灯映射表时用-->
+            <physicalLedCount>0</physicalLedCount>
+            <!--是否带电池0: 不带电池1: 带电池-->
+            <battery>0</battery>
+            <!--io输入个数-->
+            <triggerIoCnt>0</triggerIoCnt>
+            <!--混合报警输入个数-->
+            <mixAlarmOutCnt>0</mixAlarmOutCnt>
+            <!--usb接口个数-->
+            <usbNum>0</usbNum>
+        </faceBoardCaps>
+    </gFaceBoardCfgInit>
+    <!--smartIr配置-->
+	<gSmartIrCfgsInitArray>
+		<gSmartIrCfgsInit>
+			<!--驱动类型，见定义PDC_SmartIrType-->
+			<smartIrType>0</smartIrType>
+			<!--内部PWM方式驱动初始化参数-->
+			<socPwmCfg>
+				<pwmParms>
+					<!--PWM标识，从0开始计，依次对应PWM0、PWM1、...-->
+					<pwmId>5</pwmId>
+					<!--PWM模式，用于区分相同的PWM控制器，不同配置模式-->
+					<mode>0</mode>
+					<!--有效时的电平，0: 低电平 !0: 高电平-->
+					<activeLevel>1</activeLevel>
+				</pwmParms>
+			</socPwmCfg>
+			<!--不同驱动电路IO到红外芯片的分压比不同，则需要调整实际执行的占空比，以对上层提供统一效果-->
+			<dutyRationAdjust>0</dutyRationAdjust>
+			<!--1 -smartIR灯 ,2--白光补光灯,3--近光灯，4--中光灯，5--远光灯-->
+			<lampType>3</lampType>
+			<!--灯的挂接位置，0为挂接在主控芯片上，1为挂接在云台单片机上-->
+			<lampSite>0</lampSite>
+			<!--红外灯起始亮度对应的值，使用以下两个参数后， dutyRationAdjust该值废弃-->
+			<lightMin>3500</lightMin>
+			<!--红外灯最大亮度对应的上限值-->
+			<lightMax>6100</lightMax>
+		</gSmartIrCfgsInit>
+		<!--smartIr配置-->
+		<gSmartIrCfgsInit>
+			<!--驱动类型，见定义PDC_SmartIrType-->
+			<smartIrType>0</smartIrType>
+			<!--内部PWM方式驱动初始化参数-->
+			<socPwmCfg>
+				<pwmParms>
+					<!--PWM标识，从0开始计，依次对应PWM0、PWM1、...-->
+					<pwmId>6</pwmId>
+					<!--PWM模式，用于区分相同的PWM控制器，不同配置模式-->
+					<mode>0</mode>
+					<!--有效时的电平，0: 低电平 !0: 高电平-->
+					<activeLevel>1</activeLevel>
+				</pwmParms>
+			</socPwmCfg>
+			<!--不同驱动电路IO到红外芯片的分压比不同，则需要调整实际执行的占空比，以对上层提供统一效果-->
+			<dutyRationAdjust>0</dutyRationAdjust>
+			<!--1 -smartIR灯 ,2--白光补光灯,3--近光灯，4--中光灯，5--远光灯-->
+			<lampType>5</lampType>
+			<!--灯的挂接位置，0为挂接在主控芯片上，1为挂接在云台单片机上-->
+			<lampSite>0</lampSite>
+			<!--红外灯起始亮度对应的值，使用以下两个参数后， dutyRationAdjust该值废弃-->
+			<lightMin>3500</lightMin>
+			<!--红外灯最大亮度对应的上限值-->
+			<lightMax>6100</lightMax>
+		</gSmartIrCfgsInit>
+		<!--smartIr配置-->
+		<gSmartIrCfgsInit>
+			<!--驱动类型，见定义PDC_SmartIrType-->
+			<smartIrType>65535</smartIrType>
+			<!--内部PWM方式驱动初始化参数-->
+			<socPwmCfg>
+				<pwmParms>
+					<!--PWM标识，从0开始计，依次对应PWM0、PWM1、...-->
+					<pwmId>0</pwmId>
+					<!--PWM模式，用于区分相同的PWM控制器，不同配置模式-->
+					<mode>0</mode>
+					<!--有效时的电平，0: 低电平 !0: 高电平-->
+					<activeLevel>0</activeLevel>
+				</pwmParms>
+			</socPwmCfg>
+			<!--DAC88347芯片驱动初始化参数-->
+			<dacIrCfg>
+				<!--smartIr使用的DAC芯片ID， 可使用的芯片ID见设备配置PDC_MODULE_DAC -->
+				<chipId>0</chipId>
+				<!--DAC芯片通道号， 1~8 -->
+				<channel>0</channel>
+				<!--输出有效时电平-->
+				<activeLevel>0</activeLevel>
+			</dacIrCfg>
+			<!--不同驱动电路IO到红外芯片的分压比不同，则需要调整实际执行的占空比，以对上层提供统一效果-->
+			<dutyRationAdjust>0</dutyRationAdjust>
+			<!--1 -smartIR灯 ,2--白光补光灯,3--近光灯，4--中光灯，5--远光灯-->
+			<lampType>0</lampType>
+			<!--灯的挂接位置，0为挂接在主控芯片上，1为挂接在云台单片机上-->
+			<lampSite>0</lampSite>
+			<!--红外灯起始亮度对应的值，使用以下两个参数后， dutyRationAdjust该值废弃-->
+			<lightMin>0</lightMin>
+			<!--红外灯最大亮度对应的上限值-->
+			<lightMax>0</lightMax>
+		</gSmartIrCfgsInit>
+	</gSmartIrCfgsInitArray>
+    <!--看门狗配置-->
+    <gWdtCfg>
+        <!--可组合。其定义见PDC_WdtType。-->
+        <wdtTypeFlags>3</wdtTypeFlags>
+        <!-- 硬件看门狗配置信息-->
+        <hardWareWdtCfg>
+            <!--硬件喂狗GPIO引脚号-->
+            <gpioCfg>58</gpioCfg>
+            <!--硬件喂狗方式，0->低电平，1->高电平，2->下降沿，3->上升沿-->
+            <hWdtFeedType>2</hWdtFeedType>
+        </hardWareWdtCfg>
+    </gWdtCfg>
+    <gAdcCfgInit>
+        <!--设备使用的AD转换模块的ID-->
+        <adcPara>
+            <!--设备使用的AD转换模块的ID-->
+            <adcId>1</adcId>
+            <!--采样频率，单位Hz-->
+            <sampleFreq>1000</sampleFreq>
+            <!--采样模式，见定义PRC_AdcMode-->
+            <sampleMode>1</sampleMode>
+            <!--采样中断下阀值，取值范围: 0~1023，为-1时不启用-->
+            <lowTh>0</lowTh>
+            <!--采样中断下阀值，取值范围: 0~1023，为-1时不启用-->
+            <highTh>0xffffffff</highTh>
+        </adcPara>
+        <adcType>4</adcType>
+        <!--外部ir使用的gpio-->
+        <irbackGpio>0</irbackGpio>
+        <!--外部ir有效电平-->
+        <irbackGpioLevel>0</irbackGpioLevel>
+        <!--外部ADC芯片使用的I2C总线-->
+        <i2cBusId>0</i2cBusId>
+        <!--外部ADC芯片电路冲突引脚，由于电路限制对特定dm385设备使用外部ADC芯片ADS7830需要将该引脚设置为输入-->
+        <relatedGpio>0</relatedGpio>
+    </gAdcCfgInit>
+    <!--加密芯片配置-->
+    <gCryptCfg>
+        <!--加密芯片时钟引脚gpio号-->
+        <sclGpioCfg>0</sclGpioCfg>
+        <!--加密芯片数据引脚gpio号-->
+        <sdaGpioCfg>0</sdaGpioCfg>
+        <!--加密芯片时钟备份引脚gpio号-->
+        <sclGpioCfgbak>0</sclGpioCfgbak>
+        <!--加密芯片数据备份引脚gpio号-->
+        <sdaGpioCfgbak>0</sdaGpioCfgbak>
+        <!--用来标识无加密芯片-->
+        <noCryptoChip>1</noCryptoChip>
+        <!--加密类型， 定义见PDC_CryptoType-->
+        <cryptoType>1</cryptoType>
+        <!--中文设备对应的加密GPIO引脚输入有效状态-->
+        <nativeLevel>0</nativeLevel>
+        <!--GPIO加密对应的GPIO引脚-->
+        <cryptoGpio>0</cryptoGpio>
+    </gCryptCfg>
+	<!-- MCU配置-->
+	<gMcuDevInitParamsArray>
+		<gMcuDevInitParams>
+			<mcuType>0</mcuType>
+			<!--其定义见PDC_McuInterface-->
+			<mcuInterface>2</mcuInterface>
+			<interfaceCfg>
+				<i2cPara>
+					<busId>5</busId>
+					<!--见I2C设备工作模式标志定义-->
+					<opMode>1</opMode>
+					<!--从设备地址-->
+					<address>0x25</address>
+					<!--用于MCU通知主控收数据的中断管脚-->
+					<gpioCfg>0</gpioCfg>
+				</i2cPara>
+			</interfaceCfg>
+			<!--虚拟串口配置-->
+			<srialPara>
+				<!--是否支持虚拟串口,0:不支持，1:支持 -->
+				<serialEnable>0</serialEnable>
+				<!--虚拟串口数目 -->
+				<serialNum>0</serialNum>
+			</srialPara>
+		</gMcuDevInitParams>
+		<gMcuDevInitParams>
+			<mcuType>65535</mcuType>
+			<!--其定义见PDC_McuInterface-->
+			<mcuInterface>65535</mcuInterface>
+		</gMcuDevInitParams>
+	</gMcuDevInitParamsArray>
+    <!--电机配置项-->
+    <gMotorCfgInit>
+        <!--按功能划分配置-->
+        <funcCfg>
+            <type>1</type>
+            <cfg>
+                <!--电动变焦相关功能配置 -->
+                <focusCfg>
+                    <!--数字变焦使能标志-->
+                    <dzoomEnable>0</dzoomEnable>
+                    <!--光学变倍、变焦使能标志-->
+                    <zoomEnable>1</zoomEnable>
+                    <!--硬件按键使能标志-->
+                    <keyEnable>1</keyEnable>
+                    <!--没有硬件按键功能可不配置-->
+                    <motorKeyCfg>
+                        <keyType>1</keyType>
+                        <key>
+                            <!--GPIO采样按键-->
+                            <keyGpio>
+                                <!--自动聚焦按键-->
+                                <gpioAF>65535</gpioAF>
+                                <!--变倍 W2T-->
+                                <gpioW2T>76</gpioW2T>
+                                <!--变倍 T2W-->
+                                <gpioT2W>98</gpioT2W>
+                                <!--变焦 N2F-->
+                                <gpioN2F>65535</gpioN2F>
+                                <!--变焦 F2N-->
+                                <gpioF2N>65535</gpioF2N>
+                                <!--按键有效电平-->
+                                <level>0</level>
+                            </keyGpio>
+                        </key>
+                    </motorKeyCfg>
+                    <!--镜头参数配置-->
+                    <lenParam>
+                        <!--逻辑运行范围(参考点与镜头类型相关，可软件限位)-->
+                        <zmMinSteps>-267</zmMinSteps>
+                        <zmMaxSteps>585</zmMaxSteps>
+                        <afMinSteps>-245</afMinSteps>
+                        <afMaxSteps>760</afMaxSteps>
+                        <!--机械运行范围(当小于逻辑运行范围时无效)-->
+                        <zmMinMech>0</zmMinMech>
+                        <zmMaxMech>0</zmMaxMech>
+                        <afMinMech>0</afMinMech>
+                        <afMaxMech>0</afMaxMech>
+						<!--镜头型号，定义PDC_MotorLensModel-->
+						<lensModel>1026</lensModel>
+                    </lenParam>
+                    <!--数字变倍功能配置-->
+                    <dzoomCfg>
+                        <!--数字变倍最小值-->
+                        <dzoomMin>0</dzoomMin>
+                        <!--数字变倍最大值 -->
+                        <dzoomMax>0</dzoomMax>
+                        <!--数字变倍最小步进-->
+                        <dzoomStep>0</dzoomStep>
+                    </dzoomCfg>
+                    <!--镜头类型，定义见PDC_MotorLensType-->
+                    <lensType>4</lensType>
+                    <!--光耦类型，定义见PDC_MotorOcType-->
+                    <ocType>1</ocType>
+                    <!--变倍速度配置-->
+                    <zoomSpeed>
+                        <!--启动速度-->
+                        <startSpeed>0</startSpeed>
+                        <!--速度值-->
+                        <normalSpeed>0</normalSpeed>
+                    </zoomSpeed>
+                    <!--电机运行速度，0表示默认速度-->
+                    <speedCfg>
+                        <!--启动速度-->
+                        <startSpeed>50</startSpeed>
+                        <!--速度值-->
+                        <normalSpeed>1200</normalSpeed>
+                    </speedCfg>
+                    <!--聚焦光耦配置-->
+                    <afOcCfg>
+                        <enable>1</enable>
+                        <buildIn>0</buildIn>
+                        <!--光耦基本配置 -->
+                        <baseCfg>
+                            <intPin>73</intPin>
+                            <intType>8</intType>
+                        </baseCfg>
+                        <!--光耦通过GPIO控制时配置-->
+                        <pwPin>
+                            <enable>0</enable>
+                            <pinNum>0</pinNum>
+                            <level>0</level>
+                        </pwPin>
+                        <!--光耦通过GPIO控制时配置-->
+                        <enPin>
+                            <enable>1</enable>
+                            <pinNum>71</pinNum>
+                            <level>0</level>
+                        </enPin>
+                    </afOcCfg>
+                    <!--变倍光耦配置-->
+                    <zmOcCfg>
+                        <enable>1</enable>
+                        <buildIn>0</buildIn>
+                        <!--光耦基本配置-->
+                        <baseCfg>
+                            <intPin>72</intPin>
+                            <intType>8</intType>
+                        </baseCfg>
+                        <!--光耦通过GPIO控制时配置-->
+                        <pwPin>
+                            <enable>0</enable>
+                            <pinNum>0</pinNum>
+                            <level>0</level>
+                        </pwPin>
+                        <!--光耦通过GPIO控制时配置 -->
+                        <enPin>
+                            <enable>0</enable>
+                            <pinNum>0</pinNum>
+                            <level>0</level>
+                        </enPin>
+                    </zmOcCfg>
+                    <!--复位位置配置-->
+                    <resetCfg>
+                        <zmEnable>0</zmEnable>
+                        <zmPos>0</zmPos>
+                        <afEnable>0</afEnable>
+                        <afPos>0</afPos>
+                    </resetCfg>
+                    <autofocus>0</autofocus>
+                </focusCfg>
+            </cfg>
+        </funcCfg>
+        <!--电机芯片相关配置-->
+        <motorChipCfg>
+            <!--电机芯片选择-->
+            <chipType>2</chipType>
+            <!--芯片配置-->
+            <chipCfg>
+                <!--an41908配置-->
+                <an41908Cfg>
+                    <!--spi参数配置-->
+                    <spiParamas>
+                        <!--MCSPI总线控制器号，从0开始计-->
+                        <busId>1</busId>
+                        <!--选择通道，只在主模式下有效，从0开始计-->
+                        <cs>3</cs>
+                        <!--数据发送单位: 4 - 32-->
+                        <bitLen>8</bitLen>
+                        <!--SCK 总线频率 (in Hz)-->
+                        <freq>2000000</freq>
+                        <!--SPI操作模式标志，其定义见宏和类型定义区-->
+                        <mode>12</mode>
+                        <!--片选信号引脚参数, 模拟SPI CS引脚时使用-->
+                        <csPinCfg>
+                            <!--模拟引脚GPIO号，不用时为-1-->
+                            <pinId>50</pinId>
+                            <!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+                            <mode>0</mode>
+                            <!--引脚上下拉电阻配置-->
+                            <pullType>0</pullType>
+                            <!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+                            <isReverse>0</isReverse>
+                            <!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+                            <debouncTime>0</debouncTime>
+                        </csPinCfg>
+                        <!--发送一个bitLen数据后延时时间(us)，用于模拟SPI-->
+                        <byteDelay>0</byteDelay>
+                    </spiParamas>
+                    <!--gpio模拟vd信号触发,建议在spi传输完成后再触发VD，上升沿有效,空闲时保持在低电平-->
+                    <gpioVD>79</gpioVD>
+                    <!--电机走完后中断反馈信号,该gpio需要申请中断-->
+                    <gpioExt>77</gpioExt>
+                    <!--芯片复位引脚,低电平有效-->
+                    <gpioRst>78</gpioRst>
+                    <!--a 电机相位反转，设此标志位兼容硬件将电机线序接反，此处 a电机对应芯片中的AB，OSA_TRUE : Reverse; OSA_FALSE : Forward-->
+                    <aMotorReverse>0</aMotorReverse>
+                    <!--b 电机相位反转，此处 b电机对应芯片中的CD, OSA_TRUE : Reverse; OSA_FALSE : Forward-->
+                    <bMotorReverse>0</bMotorReverse>
+                    <!--a 电机PWM最大占空比，1000对应满，0对应空-->
+                    <aPeakDuty>0</aPeakDuty>
+                    <!--b 电机PWM最大占空比，1000对应满，0对应空-->
+                    <bPeakDuty>0</bPeakDuty>
+                    <!--a电机细分次数-->
+                    <aSubdiv>1</aSubdiv>
+                    <!--b电机细分次数 -->
+                    <bSubdiv>1</bSubdiv>
+                </an41908Cfg>
+            </chipCfg>
+            <!--最大允许同时运行的电机数-->
+            <maxCh>0</maxCh>
+			<maxRunTimeArray>
+				<!--电机运行时间限制-->
+				<maxRunTime>0</maxRunTime>
+				<!--电机运行时间限制-->
+				<maxRunTime>0</maxRunTime>
+			</maxRunTimeArray>
+            <!--选择电机运行调度方式，见PDC_MotorSchedType-->
+            <schedType>0</schedType>
+            <!--步数细分次数-->
+            <Subdiv>0</Subdiv>
+        </motorChipCfg>
+    </gMotorCfgInit>
+    <!--光圈配置信息-->
+    <gIrisDevInitParams>
+        <!--光圈类型，见定义PDC_IrisType-->
+        <irisType>1</irisType>
+        <!--光圈驱动方式，见定义PDC_IrisDevType-->
+        <devType>4</devType>
+        <typeCfg>
+            <!--motor.ko驱动HALL光圈配置信息 64字节-->
+            <irisHallCfg>
+                <chipId>0</chipId>
+                <gpioVdIris>75</gpioVdIris>
+                <dGain>0x38</dGain>
+                <hallOffset>0x80</hallOffset>
+                <hallBias>0x30</hallBias>
+                <hallGain>0x4</hallGain>
+            </irisHallCfg>
+        </typeCfg>
+    </gIrisDevInitParams>
+	<!--heat配置-->
+	<gHeatCfgArray>
+		<gHeatCfg>
+			<!--驱动类型，见定义PDC_HeatEnType-->
+			<heatEnType>3</heatEnType>
+			<typeCfg>
+				<!--通过MCU读取温度使能方式配置  64字节-->
+				<heatMcuCfg>
+					<!--停止加热的上限温度-->
+					<upperTemp>0</upperTemp>
+					<!--开启加热的下限温度-->
+					<floorTemp>-10</floorTemp>
+					<!--单片机加热通道号，与单片机对应-->
+					<channel>0</channel>
+				</heatMcuCfg>
+			</typeCfg>
+			<!--置1有效，设备加热模块可独立工作,其他模块无需通过接口PDC_heatSetStatus使能加热-->
+			<disableSetStatus>0</disableSetStatus>
+			<!--加热功能描述,定义见PDC_HeatFunction,可不配置-->
+			<function>0</function>
+		</gHeatCfg>
+		<gHeatCfg>
+			<!--驱动类型，见定义PDC_HeatEnType-->
+			<heatEnType>65535</heatEnType>
+			<typeCfg>
+			</typeCfg>
+			<!--置1有效，设备加热模块可独立工作,其他模块无需通过接口PDC_heatSetStatus使能加热-->
+			<disableSetStatus>0</disableSetStatus>
+			<!--加热功能描述,定义见PDC_HeatFunction,可不配置-->
+			<function>0</function>
+		</gHeatCfg>
+	</gHeatCfgArray>
+</gCfgAllInfo>
+

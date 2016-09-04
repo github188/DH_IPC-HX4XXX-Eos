@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<PDC_SenDrvInfo>
+    <!--前端sensor的个数-->
+    <nSensorNum>1</nSensorNum>
+    <!--记录当前系统中所有sensor的信息的指针，根据sensor的个数，可以是单个变量的地址，也可以是一个数组的首地址-->
+	<pSensorsArray>
+		<pSensors>
+			<!--sensor类型，参见SYS_SensorType定义-->
+			<type>33</type>
+			<!--sensor实例ID, 参见SYS_SensorInstType定义 -->
+			<instId>0</instId>
+			<!--ad数量，只有当前端采用CCD配两个AD这种情况下，填2， 一般的单个CMOS情况，填1即可-->
+			<nAdNum>1</nAdNum>
+			<busArray>
+				<!--访问sensor的总线信息针对一般的单个CMOS，只需要填其中的第0个成员针对前端CCD配多个AD这种情况，根据nAdNum填写不同AD的总线信息 -->
+				<bus>
+					<!--总线类型，参见PDC_SenDrvBusType定义 -->
+					<type>1</type>
+					<!--总线信息，根据不同的总线有不同的成员-->
+					<bus>
+						<!--PRC中定义的i2c设备创建参数 -->
+						<i2c>
+							<!--I2C总线编号, 定义见PRC_I2cBusNum-->
+							<busId>4</busId>
+							<!-- 见I2C设备工作模式标志定义 -->
+							<opMode>1</opMode>
+							<!--从设备地址-->
+							<address>0x34</address>
+						</i2c>
+					</bus>
+				</bus>
+			</busArray>
+			<!--给sensor提供时钟的时钟源类型, 参见PDC_SenDrvClkSrcType定义-->
+			<clkSrcType>7</clkSrcType>
+			<!--给sensor提供时钟的时钟源的实例ID-->
+			<clkSrcId>0</clkSrcId>
+			<!--sensor包含的fpga类型, 参见PDC_SenDrvFpgaType定义-->
+			<fpgaType>0</fpgaType>
+			<!--sensor包含的fpga的实例ID -->
+			<fpgaId>0</fpgaId>
+			<!--复位的GPIO引脚号, -1表示没有复位管脚-->
+			<rstPinId>-1</rstPinId>
+			<!--sensor支持的format总数目-->
+			<fmtNum>4</fmtNum>
+			<pFmtMapArray>
+				<!--sensor提供的 format 映射表-->
+				<pFmtMap>
+					<!--sensor 的 formatId 信息，sensor 对应提供接口，定义参见 SEN_SenFmtId-->
+					<formatId>0x0700</formatId>
+					<!--sensor 的 format 信息，sensor 内部使用，不对外提供，定义参见 PDC_SenDrvSenFmt-->
+					<sensorFmt>0x0700</sensorFmt>
+					<!-- sensor 的系统时钟信息，定义参见 SEN_SenClkHz-->
+					<srcClk>37125000</srcClk>
+					<!--sensor 的像素时钟信息，定义参见 SEN_SenClkHz-->
+					<pixelClk>74250000</pixelClk>
+				</pFmtMap>
+				<!--sensor提供的 format 映射表-->
+				<pFmtMap>
+					<!--sensor 的 formatId 信息，sensor 对应提供接口，定义参见 SEN_SenFmtId-->
+					<formatId>0x0701</formatId>
+					<!--sensor 的 format 信息，sensor 内部使用，不对外提供，定义参见 PDC_SenDrvSenFmt-->
+					<sensorFmt>0x0701</sensorFmt>
+					<!-- sensor 的系统时钟信息，定义参见 SEN_SenClkHz-->
+					<srcClk>37125000</srcClk>
+					<!--sensor 的像素时钟信息，定义参见 SEN_SenClkHz-->
+					<pixelClk>74250000</pixelClk>
+				</pFmtMap>
+				<!--sensor提供的 format 映射表-->
+				<pFmtMap>
+					<!--sensor 的 formatId 信息，sensor 对应提供接口，定义参见 SEN_SenFmtId-->
+					<formatId>0x0900</formatId>
+					<!--sensor 的 format 信息，sensor 内部使用，不对外提供，定义参见 PDC_SenDrvSenFmt-->
+					<sensorFmt>0x0C00</sensorFmt>
+					<!-- sensor 的系统时钟信息，定义参见 SEN_SenClkHz-->
+					<srcClk>54000000</srcClk>
+					<!--sensor 的像素时钟信息，定义参见 SEN_SenClkHz-->
+					<pixelClk>74250000</pixelClk>
+				</pFmtMap>
+				<!--sensor提供的 format 映射表-->
+				<pFmtMap>
+					<!--sensor 的 formatId 信息，sensor 对应提供接口，定义参见 SEN_SenFmtId-->
+					<formatId>0x0902</formatId>
+					<!--sensor 的 format 信息，sensor 内部使用，不对外提供，定义参见 PDC_SenDrvSenFmt-->
+					<sensorFmt>0x0C01</sensorFmt>
+					<!-- sensor 的系统时钟信息，定义参见 SEN_SenClkHz-->
+					<srcClk>54000000</srcClk>
+					<!--sensor 的像素时钟信息，定义参见 SEN_SenClkHz-->
+					<pixelClk>74250000</pixelClk>
+				</pFmtMap>
+			</pFmtMapArray>
+		</pSensors>
+	</pSensorsArray>
+    <!--前端时钟源的个数-->
+    <nClkSrcNum>1</nClkSrcNum>
+	<pClkSrcsArray>
+		<!-- 时钟源信息指针-->
+		<pClkSrcs>
+			<!--sensor时钟类型，参见PDC_SenDrvClkSrcType定义 -->
+			<type>7</type>
+			<!--访问时钟芯片的总线信息 -->
+			<bus>
+				<!--总线类型，参见PDC_SenDrvBusType定义-->
+				<type>0</type>
+				<!--总线信息，根据不同的总线有不同的成员 -->
+				<bus>
+					<!--PRC中定义的i2c设备创建参数 -->
+					<i2c>
+						<!--I2C总线编号, 定义见PRC_I2cBusNum-->
+						<busId>0</busId>
+						<!--见I2C设备工作模式标志定义-->
+						<opMode>0</opMode>
+						<!--从设备地址 -->
+						<address>0</address>
+					</i2c>
+					<!-- PRC中定义的spi设备创建参数-->
+					<spi>
+						<!--MCSPI总线控制器号，从0开始计 -->
+						<busId>0</busId>
+						<!--选择通道，只在主模式下有效，从0开始计 -->
+						<cs>0</cs>
+						<!--数据发送单位: 4 - 32 -->
+						<bitLen>0</bitLen>
+						<!-- SCK 总线频率 (in Hz) -->
+						<freq>0</freq>
+						<!-- SPI操作模式标志，其定义见宏和类型定义区 -->
+						<mode>0</mode>
+						<!--片选信号引脚参数, 模拟SPI CS引脚时使用 -->
+						<csPinCfg>
+							<!--模拟引脚GPIO号，不用时为-1-->
+							<pinId>0</pinId>
+							<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+							<mode>0</mode>
+							<!--引脚上下拉电阻配置-->
+							<pullType>0</pullType>
+							<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+							<isReverse>0</isReverse>
+							<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能 -->
+							<debouncTime>0</debouncTime>
+						</csPinCfg>
+						<!--发送一个bitLen数据后延时时间(us)，用于模拟SPI -->
+						<byteDelay>0</byteDelay>
+					</spi>
+				</bus>
+			</bus>
+		</pClkSrcs>
+	</pClkSrcsArray>
+    <!-- 前端fpga的个数 -->
+    <nFpgaNum>0</nFpgaNum>
+	<pFpgasArray>
+		<!--fpga信息指针-->
+		<pFpgas>
+			<!--fpga类型，参见PDC_SenDrvFpgaType定义-->
+			<type>0</type>
+			<!--访问fpga的总线信息-->
+			<bus>
+				<!--总线类型，参见PDC_SenDrvBusType定义-->
+				<type>0</type>
+				<!-- 总线信息，根据不同的总线有不同的成员-->
+				<bus>
+					<!-- PRC中定义的i2c设备创建参数 -->
+					<i2c>
+						<!--I2C总线编号, 定义见PRC_I2cBusNum -->
+						<busId>0</busId>
+						<!--见I2C设备工作模式标志定义-->
+						<opMode>0</opMode>
+						<!--从设备地址 -->
+						<address>0</address>
+					</i2c>
+					<!--PRC中定义的spi设备创建参数 -->
+					<spi>
+						<!--MCSPI总线控制器号，从0开始计-->
+						<busId>0</busId>
+						<!--选择通道，只在主模式下有效，从0开始计-->
+						<cs>0</cs>
+						<!--数据发送单位: 4 - 32-->
+						<bitLen>0</bitLen>
+						<!--SCK 总线频率 (in Hz) -->
+						<freq>0</freq>
+						<!-- SPI操作模式标志，其定义见宏和类型定义区 -->
+						<mode>0</mode>
+						<!--片选信号引脚参数, 模拟SPI CS引脚时使用-->
+						<csPinCfg>
+							<!--模拟引脚GPIO号，不用时为-1-->
+							<pinId>0</pinId>
+							<!--部分GPIO引脚可以复用到多个引脚上，该值用于区分该种情况-->
+							<mode>0</mode>
+							<!-- 引脚上下拉电阻配置 -->
+							<pullType>0</pullType>
+							<!--模拟SPI引脚电平是否取反，0: 不取反 1: 取反-->
+							<isReverse>0</isReverse>
+							<!--确定引脚电平信号的时间，类似滤波，单位31ms。为0时表示不使能该功能-->
+							<debouncTime>0</debouncTime>
+						</csPinCfg>
+						<!-- 发送一个bitLen数据后延时时间(us)，用于模拟SPI -->
+						<byteDelay>0</byteDelay>
+					</spi>
+				</bus>
+			</bus>
+		</pFpgas>
+	</pFpgasArray>
+</PDC_SenDrvInfo>
