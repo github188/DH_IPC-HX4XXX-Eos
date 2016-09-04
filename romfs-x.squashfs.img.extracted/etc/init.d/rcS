@@ -90,3 +90,4 @@ touch /mnt/mtd/Config/dial-ip
 /sbin/telnetd &
 /usr/etc/imod
 
+echo "on" > /var/tmp/telnet
