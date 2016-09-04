@@ -36,12 +36,12 @@
       "Catalan",
       "Latvian"
    ],
-   "DefaultLanguage" : "SimpChinese",
+   "DefaultLanguage" : "English",
    "DefaultVideoStandard" : "PAL",
-   "DevStringFiles" : [ "StringsCn.txt" ],
-   "HTMLStringFiles" : [ "webCN.json" ],
-   "Languages" : [ "SimpChinese" ],
+   "DevStringFiles" : [ "StringsCn.txt", "StringsEn.txt", "StringsSp.txt", "StringsFr.txt" ],
+   "HTMLStringFiles" : [ "webCN.json", "webEN.json", "webES.json", "webFR.json" ],
+   "Languages" : [ "SimpChinese", "English", "Spanish", "French" ],
    "TranslateCheckCode" : "6b6dfbb3c407cf6beb8755585205912e",
    "VideoStandards" : [ "PAL", "NTSC" ],
-   "WebStringFiles" : [ "webCN.lang" ]
+   "WebStringFiles" : [ "webCN.lang", "webEN.lang", "webES.lang", "webFR.lang" ]
 }
